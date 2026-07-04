@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+
+<!-- Google AdSense Code -->
+<script async src="https://googlesyndication.com"
+     crossorigin="anonymous"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+}
+
+.container{
+    background:#fff;
+    width:350px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:2px solid #2575fc;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2575fc;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d5fe0;
+}
+
+#result{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+    color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Age Calculator</h1>
+
+    <input type="date" id="dob">
+
+    <button id="btn">Calculate Age</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+document.getElementById("btn").addEventListener("click", function(){
+
+    const dob = document.getElementById("dob").value;
+    const result = document.getElementById("result");
+
+    if(dob === ""){
+        result.innerHTML = "Please select your date of birth";
+        return;
+    }
+
+    const birth = new Date(dob);
+    const today = new Date();
+
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+
+    if(days < 0){
+        months--;
+        const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += lastMonth.getDate();
+    }
+
+    if(months < 0){
+        years--;
+        months += 12;
+    }
+
+    result.innerHTML =
+    years + " Years<br>" +
+    months + " Months<br>" +
+    days + " Days";
+
+});
+</script>
+
+</body>
+</html>
